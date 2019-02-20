@@ -25,3 +25,12 @@ class Feature(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Item(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.TextField()
+    features = models.ManyToManyField(Detail, related_name='features')
+
+    def __str__(self):
+        return self.title
