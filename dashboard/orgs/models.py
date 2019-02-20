@@ -16,3 +16,12 @@ class Detail(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Feature(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.TextField()
+    details = models.ManyToManyField(Detail, related_name='details')
+
+    def __str__(self):
+        return self.title
