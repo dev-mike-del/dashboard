@@ -34,3 +34,12 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.TextField()
+    items = models.ManyToManyField(Detail, related_name='items')
+
+    def __str__(self):
+        return self.title
