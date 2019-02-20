@@ -43,3 +43,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class SubGroup(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.TextField()
+    categories = models.ManyToManyField(Detail, related_name='categories')
+
+    def __str__(self):
+        return self.title
