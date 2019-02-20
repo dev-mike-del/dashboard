@@ -52,3 +52,13 @@ class SubGroup(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Group(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.TextField()
+    sub_Group = models.ManyToManyField(Detail, related_name='sub_Group')
+
+    def __str__(self):
+        return self.title
+
