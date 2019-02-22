@@ -30,7 +30,7 @@ class Feature(models.Model):
 class Item(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
-    features = models.ManyToManyField(Detail, related_name='features')
+    features = models.ManyToManyField(Feature, related_name='features')
 
     def __str__(self):
         return self.title
@@ -39,7 +39,7 @@ class Item(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
-    items = models.ManyToManyField(Detail, related_name='items')
+    items = models.ManyToManyField(Item, related_name='items')
 
     def __str__(self):
         return self.title
@@ -48,7 +48,7 @@ class Category(models.Model):
 class SubGroup(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
-    categories = models.ManyToManyField(Detail, related_name='categories')
+    categories = models.ManyToManyField(Category, related_name='categories')
 
     def __str__(self):
         return self.title
@@ -57,7 +57,7 @@ class SubGroup(models.Model):
 class Group(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
-    sub_Group = models.ManyToManyField(Detail, related_name='sub_Group')
+    sub_Groups = models.ManyToManyField(SubGroup, related_name='sub_Groups')
 
     def __str__(self):
         return self.title
@@ -66,7 +66,26 @@ class Group(models.Model):
 class SubProperty(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
-    group = models.ManyToManyField(Detail, related_name='group')
+    groups = models.ManyToManyField(Group, related_name='groups')
 
     def __str__(self):
         return self.title
+
+
+class Property(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.TextField()
+    sub_Properties = models.ManyToManyField(SubProperty, related_name='sub_Properties')
+
+    def __str__(self):
+        return self.title
+
+
+class Organization(models.Model):
+    title = models.CharField(max_length=30)
+    body = models.TextField()
+    properties = models.ManyToManyField(Property, related_name='properties')
+
+    def __str__(self):
+        return self.title
+
